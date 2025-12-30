@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations for {{ username }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Product Recommendations</h1>
+            <p class="subtitle">Top 5 recommendations for <strong>{{ username }}</strong></p>
+        </div>
+
+        <div class="results-container">
+            {% if recommendations %}
+                <div class="recommendations-list">
+                    {% for product_name, sentiment_score in recommendations %}
+                        <div class="recommendation-item">
+                            <div class="recommendation-number">{{ loop.index }}</div>
+                            <div class="recommendation-content">
+                                <h3 class="product-name">{{ product_name }}</h3>
+                                <div class="sentiment-score">
+                                    <span class="score-label">Sentiment Score:</span>
+                                    <span class="score-value">{{ "%.2f"|format(sentiment_score * 100) }}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-results">
+                    <p>No recommendations available.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="actions">
+            <a href="{{ url_for('index') }}" class="back-btn">Get Another Recommendation</a>
+        </div>
+    </div>
+</body>
+</html>
+
