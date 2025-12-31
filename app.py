@@ -6,7 +6,7 @@ Implements item-based collaborative filtering with sentiment analysis
 from flask import Flask, render_template, request, flash
 import os
 
-from recommendation_engine import initialize_engine, get_recommendations
+from model import initialize_engine, get_recommendations
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
